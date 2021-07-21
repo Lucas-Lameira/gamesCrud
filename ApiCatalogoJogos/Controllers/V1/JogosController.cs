@@ -1,4 +1,5 @@
-﻿using ApiCatalogoJogos.InputModel;
+﻿using ApiCatalogoJogos.Exceptions;
+using ApiCatalogoJogos.InputModel;
 using ApiCatalogoJogos.Services;
 using ApiCatalogoJogos.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -57,9 +58,9 @@ namespace ApiCatalogoJogos.Controllers.V1
                 var jogo = await _jogoService.Inserir(jogoInputModel);                
                 return Ok(jogo);
             }
-            catch (Exception ex)
+            catch (JogoJaCadastradoException ex)
             {
-                return UnprocessableEntity("Jogo já cadastrado");
+                return UnprocessableEntity("Nop");
             }
         }
 
@@ -71,8 +72,7 @@ namespace ApiCatalogoJogos.Controllers.V1
                 await _jogoService.Atualizar(idJogo, jogoInputModel);
                 return Ok();
             }
-            // catch (JogoNaoCadastradoException ex)
-            catch (Exception ex)
+            catch (JogoNaoCadastradoException ex)            
             {
                 return NotFound("Jogo não encontrado");
             }         
@@ -86,8 +86,7 @@ namespace ApiCatalogoJogos.Controllers.V1
                 await _jogoService.Atualizar(idJogo, preco);
                 return Ok();
             }
-            // catch (JogoNaoCadastradoException ex)
-            catch (Exception ex)
+            catch (JogoNaoCadastradoException ex)           
             {
                 return NotFound("Jogo não encontrado");
             }
@@ -101,8 +100,7 @@ namespace ApiCatalogoJogos.Controllers.V1
                 await _jogoService.Remover(idJogo);
                 return Ok();
             }
-            // catch (JogoNaoCadastradoException ex)
-            catch (Exception ex)
+            catch (JogoNaoCadastradoException ex)            
             {
                 return NotFound("Jogo não encontrado");
             }
