@@ -24,6 +24,8 @@ namespace ApiCatalogoJogos.Controllers.V1
             _jogoService = jogoService;
         }
 
+
+        //Swager comments
         [HttpGet]
         public async Task<ActionResult<IEnumerable<JogoViewModel>>> Obter([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1, 50)] int quantidade = 5)
         {
